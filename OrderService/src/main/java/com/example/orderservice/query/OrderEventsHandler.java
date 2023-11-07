@@ -1,9 +1,9 @@
 package com.example.orderservice.query;
 
-import com.example.orderservice.core.events.OrderCreatedEvent;
 import com.example.orderservice.core.domain.order.entity.OrderEntity;
 import com.example.orderservice.core.domain.order.repository.OrderRepository;
 import com.example.orderservice.core.events.OrderApprovedEvent;
+import com.example.orderservice.core.events.OrderCreatedEvent;
 import com.example.orderservice.core.events.OrderRejectedEvent;
 import com.example.orderservice.core.events.ProductCreatedEvent;
 import lombok.RequiredArgsConstructor;
@@ -52,8 +52,5 @@ public class OrderEventsHandler {
     @EventHandler
     public void on(ProductCreatedEvent productCreatedEvent) {
         log.info("&&&&& ProductCreatedEvent");
-//        OrderEntity order = new OrderEntity();
-//        BeanUtils.copyProperties(orderCreatedEvent, order);
-//        orderRepository.save(order);
     }
 }
