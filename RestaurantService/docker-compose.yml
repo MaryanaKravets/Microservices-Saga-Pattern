@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:13.3
+    environment:
+      POSTGRES_DB: "restaurantDB"
+      POSTGRES_USER: "ps"
+      POSTGRES_PASSWORD: "ps"
+    ports:
+      - "5432:5432"

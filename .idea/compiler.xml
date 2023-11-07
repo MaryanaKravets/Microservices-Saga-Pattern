@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="OrderConfirmationService" />
+        <module name="SagaShippingService" />
+        <module name="UserService" />
+        <module name="RestaurantService" />
+        <module name="ApiGateway" />
+        <module name="core" />
+        <module name="WarehouseService" />
+        <module name="SagaPaymentService" />
+        <module name="ConfigServer" />
+        <module name="DiscoveryService" />
+        <module name="OrderService" />
+        <module name="PaymentService" />
+        <module name="SagaCore" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ApiGateway" target="1.8" />
+      <module name="ConfigServer" target="1.8" />
+      <module name="core" target="11" />
+      <module name="DiscoveryService" target="1.8" />
+      <module name="OrderConfirmationService" target="17" />
+      <module name="OrderService" target="1.8" />
+      <module name="PaymentService" target="17" />
+      <module name="RestaurantService" target="1.8" />
+      <module name="SagaCore" target="11" />
+      <module name="SagaOrderService" target="17" />
+      <module name="SagaPaymentService" target="17" />
+      <module name="SagaShippingService" target="17" />
+      <module name="UserService" target="1.8" />
+      <module name="WarehouseService" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="ApiGateway" options="-parameters" />
+      <module name="ConfigServer" options="-parameters" />
+      <module name="DiscoveryService" options="-parameters" />
+      <module name="OrderConfirmationService" options="-parameters" />
+      <module name="OrderService" options="-parameters" />
+      <module name="PaymentService" options="-parameters" />
+      <module name="RestaurantService" options="-parameters" />
+      <module name="SagaCore" options="-parameters" />
+      <module name="SagaOrderService" options="-parameters" />
+      <module name="SagaPaymentService" options="-parameters" />
+      <module name="SagaShippingService" options="-parameters" />
+      <module name="UserService" options="-parameters" />
+      <module name="WarehouseService" options="-parameters" />
+      <module name="core" options="-parameters" />
+    </option>
+  </component>
+</project>

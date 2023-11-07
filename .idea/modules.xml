@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ApiGateway/ApiGateway.iml" filepath="$PROJECT_DIR$/ApiGateway/ApiGateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ConfigServer/ConfigServer.iml" filepath="$PROJECT_DIR$/ConfigServer/ConfigServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DiscoveryService/DiscoveryService.iml" filepath="$PROJECT_DIR$/DiscoveryService/DiscoveryService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/MicriservicesPDP.iml" filepath="$PROJECT_DIR$/.idea/MicriservicesPDP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OrderConfirmationService/OrderConfirmationService.iml" filepath="$PROJECT_DIR$/OrderConfirmationService/OrderConfirmationService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OrderService/OrderService.iml" filepath="$PROJECT_DIR$/OrderService/OrderService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PaymentService/PaymentService.iml" filepath="$PROJECT_DIR$/PaymentService/PaymentService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RestaurantService/RestaurantService.iml" filepath="$PROJECT_DIR$/RestaurantService/RestaurantService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SagaCore/SagaCore.iml" filepath="$PROJECT_DIR$/SagaCore/SagaCore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SagaPaymentService/SagaPaymentService.iml" filepath="$PROJECT_DIR$/SagaPaymentService/SagaPaymentService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SagaShippingService/SagaShippingService.iml" filepath="$PROJECT_DIR$/SagaShippingService/SagaShippingService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/UserService/UserService.iml" filepath="$PROJECT_DIR$/UserService/UserService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WarehouseService/WarehouseService.iml" filepath="$PROJECT_DIR$/WarehouseService/WarehouseService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CoreLibrary/core.iml" filepath="$PROJECT_DIR$/CoreLibrary/core.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,161 @@
+version: '3'
+
+services:
+  postgresqldb:
+    image: postgres:13.3
+    networks:
+      - pdp-network
+    environment:
+      POSTGRES_USER: ps
+      POSTGRES_PASSWORD: ps
+      POSTGRES_DB: restaurantDB
+    volumes:
+      - dbvolume:/var/lib/postgresql/data
+    ports:
+      - 5433:5432
+      
+  mongodb:
+    image: mongo:3.0.4
+    networks:
+      - pdp-network
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ps
+      MONGO_INITDB_ROOT_PASSWORD: ps
+      MONGO_INITDB_DATABASE: productDB
+    ports:
+      - 27018:27017
+   
+  eureka:
+    build: ./DiscoveryService
+    ports:
+      - "8010:8010" 
+    networks:
+      - pdp-network 
+    environment:
+      SPRING_APPLICATION_NAME: discovery-service
+  
+  config:
+    build: ./ConfigServer
+    ports:
+      - "8888:8888"
+    networks:
+      - pdp-network
+    environment:
+      SPRING_APPLICATION_NAME: config-server
+      SPRING_CLOUD_CONFIG_SERVER_GIT_URI: https://Maryana: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@github.com/MaryanaKravets/PDPConfigServerConfiguration
+      SPRING_CLOUD_CONFIG_SERVER_GIT_CLONE-ON-START: "true"
+      SPRING_CLOUD_CONFIG_SERVER_GIT_DEFAULT-LABEL: main
+      SPRING_PROFILES_ACTIVE: default
+    
+  gateway:
+    build: ./ApiGateway
+    ports:
+      - "8013:8013"
+    networks:
+      - pdp-network
+    restart: always
+    environment:
+      SPRING_APPLICATION_NAME: api-gateway
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8010/eureka/  
+      SPRING_CONFIG_IMPORT: optional:configserver:http://config:8888
+      SPRING_CLOUD_CONFIG_FAIL_FAST: 'true'
+      SPRING_CLOUD_CONFIG_RETRY_MAX_ATTEMPTS: 10
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+      
+    depends_on:
+      - eureka
+      - config
+        
+  restaurant:
+    build: ./RestaurantService  
+    
+    networks:
+      - pdp-network
+    restart: always
+    environment:
+      SPRING_DATASOURCE_USERNAME: ps
+      SPRING_DATASOURCE_PASSWORD: ps
+      DB: restaurantDB
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresqldb:5432/restaurantDB
+      SPRING_APPLICATION_NAME: restaurant-service
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8010/eureka/
+      SPRING_CONFIG_IMPORT: optional:configserver:http://config:8888
+      SPRING_CLOUD_CONFIG_FAIL_FAST: 'true'
+      SPRING_CLOUD_CONFIG_RETRY_MAX_ATTEMPTS: 10
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+    
+    depends_on:
+      - postgresqldb
+      - eureka
+      - config
+      
+  user:
+    build: ./UserService 
+    ports:
+      - "8014:8014" 
+    networks:
+      - pdp-network
+    restart: always
+    environment:
+      SPRING_DATASOURCE_USERNAME: ps
+      SPRING_DATASOURCE_PASSWORD: ps
+      DB: restaurantDB
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresqldb:5432/restaurantDB
+      SPRING_APPLICATION_NAME: user-service
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8010/eureka/
+      SPRING_CONFIG_IMPORT: optional:configserver:http://config:8888
+      SPRING_CLOUD_CONFIG_FAIL_FAST: 'true'
+      SPRING_CLOUD_CONFIG_RETRY_MAX_ATTEMPTS: 10
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+      
+     
+    depends_on:
+      - postgresqldb
+      - eureka
+      - config
+      
+      
+  warehouse:
+    build: ./WarehouseService 
+    ports:
+      - "8015:8015" 
+    networks:
+      - pdp-network
+    restart: always
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://ps:ps@mongodb:27017/productDB?authSource=admin
+      SPRING_APPLICATION_NAME: warehouse-service
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8010/eureka/
+      SPRING_CONFIG_IMPORT: optional:configserver:http://config:8888
+      SPRING_CLOUD_CONFIG_FAIL_FAST: 'true'
+      SPRING_CLOUD_CONFIG_RETRY_MAX_ATTEMPTS: 10
+     
+    depends_on:
+      - mongodb
+      - eureka
+      - config
+   
+  
+  rabbitmq:
+    image: rabbitmq:3.5.3-management
+    networks:
+      - pdp-network
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+ 
+volumes:
+  dbvolume:
+  
+networks:
+  pdp-network:
